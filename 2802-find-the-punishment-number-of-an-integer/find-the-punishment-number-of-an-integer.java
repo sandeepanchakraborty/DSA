@@ -5,6 +5,9 @@ class Solution {
         if(j == n){
             return (curSum == i);
         }
+        if(curSum > i){
+            return false;
+        }
         for(int index=j;index<n;index++){
             int val = Integer.parseInt(i2.substring(j,index+1));
             if(isPartition(index+1,i2,i,curSum+val)){
