@@ -25,7 +25,7 @@ class Solution {
             if(nums[i]==ele1)count1++;
             if(nums[i]==ele2)count2++;
         }
-        int res=n/3;
+        int res=(n/3);
         if(count1>res) ans.add(ele1);
         if(count2>res) ans.add(ele2);
 
