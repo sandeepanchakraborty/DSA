@@ -17,24 +17,12 @@ class Solution {
             int end = intervals[i][1];
 
             // Skip intervals that are already merged
-            if (!ans.isEmpty() && end <= ans.get(ans.size() - 1)[1]) {
-                continue;
+            if (ans.isEmpty()|| intervals[i][0]>ans.get(ans.size()-1)[1]) {
+                ans.add(new int[]{start,end});
+            }else{
+                ans.get(ans.size()-1)[1]=Math.max(ans.get(ans.size()-1)[1],end);
             }
-
-            // Merge overlapping intervals
-            for (int j = i + 1; j < n; j++) {
-                if (intervals[j][0] <= end) {
-                    end = Math.max(end, intervals[j][1]);
-                } else {
-                    break;
-                }
-            }
-
-            // Add the merged interval to the result
-            ans.add(new int[] { start, end });
         }
-
-        // Convert the result list to an array
         return ans.toArray(new int[ans.size()][]);
     }
 }
