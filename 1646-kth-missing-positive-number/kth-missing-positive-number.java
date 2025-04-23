@@ -11,6 +11,6 @@ class Solution {
                 end=mid-1;
             }
         }
-        return 1+k+end;
+        return start+k;
     }
 }
