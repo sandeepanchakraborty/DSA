@@ -1,32 +1,39 @@
 class Solution {
-    public static int minEatingSpeed(int[] v, int h) { // Renamed method
-        int start = 1, end = maxele(v);
-        
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
-            int totalH = Calculatetotalh(v, mid);
-            if (totalH <= h) {
-                end = mid - 1;
-            } else {
-                start = mid + 1;
+    public int minEatingSpeed(int[] arr, int h) {
+         int start=1;
+        int end=Integer.MIN_VALUE;
+
+        //finding max
+
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>end){
+                end=arr[i];
             }
         }
-        return start;
-    }
+        int ans=-1;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            if(isEatingSpeedValid(arr,mid,h)){
+                ans=mid;
+                end=mid-1;
 
-    public static int maxele(int[] v) {
-        int maxi = Integer.MIN_VALUE;
-        for (int num : v) {
-            maxi = Math.max(maxi, num);
+            }
+            else{
+                start=mid+1;
+            }
         }
-        return maxi;
-    }
+        return ans;
 
-    public static int Calculatetotalh(int[] v, int hourly) {
-        int totalH = 0;
-        for (int num : v) {
-            totalH += Math.ceil((double) num / hourly);
+    }
+     boolean isEatingSpeedValid(int arr[],int eatingspeed,int hours){
+        int hourspent=0;
+        for(int i=0;i<arr.length;i++){
+            hourspent+=arr[i]/eatingspeed;
+            if(arr[i]%eatingspeed!=0){
+                hourspent+=1;
+            }
+            if(hourspent>hours) return false;
         }
-        return totalH;
+        return true;
     }
 }
