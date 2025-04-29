@@ -1,18 +1,31 @@
 class Solution {
     public long countSubarrays(int[] nums, int k) {
-        int maxElement = Arrays.stream(nums).max().getAsInt();
-        long res = 0;
-        int left = 0, maxiCount = 0;
-        
-        for (int right = 0; right < nums.length; right++) {
-            if (nums[right] == maxElement) maxiCount++;
-            while (maxiCount == k) {
-                res += nums.length - right;
-                if (nums[left] == maxElement) maxiCount--;
-                left++;
+        int n = nums.length;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > max) {
+                max = nums[i];
             }
         }
         
-        return res;
+        int i = 0;
+        int countmax = 0;
+        long result = 0;
+        
+        for (int j = 0; j < n; j++) {
+            if (nums[j] == max) {
+                countmax++;
+            }
+            
+            while (countmax >= k) {
+                result += (n - j);
+                if (nums[i] == max) {
+                    countmax--;
+                }
+                i++;
+            }
+        }
+        
+        return result;
     }
 }
