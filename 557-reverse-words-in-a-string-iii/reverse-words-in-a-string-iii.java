@@ -1,24 +1,25 @@
 class Solution {
     public String reverseWords(String s) {
-    char arr[]=s.toCharArray();
-    int len=arr.length;
-    int startPointer=0;
-    for(int endPointer=0;endPointer<=len;endPointer++){
-        if(endPointer==len || arr[endPointer]==' '){
-            reverse(arr, startPointer, endPointer-1);
-            startPointer=endPointer+1;
+        char arr[]=s.toCharArray();
+        int len=arr.length;
+        int startindex=0;
+        for(int endindex=0;endindex<=len;endindex++){
+            if(endindex==len || arr[endindex]==' '){
+                reverse(arr,startindex,endindex-1);
+                startindex=endindex+1;
+            }
         }
-    }
-    return new String(arr);
+        return new String(arr);
     }
 
-   public void reverse(char[] arr,int startPointer,int endPointer){
-    while(startPointer<endPointer){
-       char temp=arr[startPointer];
-        arr[startPointer]=arr[endPointer];
-        arr[endPointer]=temp;
-        startPointer++;
-        endPointer--;
+
+    public void reverse(char arr[],int startindex,int endindex){
+        while(startindex<endindex){
+            char temp=arr[startindex];
+            arr[startindex]=arr[endindex];
+            arr[endindex]=temp;
+            startindex++;
+            endindex--;
+       }
     }
-   } 
 }
