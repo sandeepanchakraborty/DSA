@@ -1,22 +1,9 @@
 class Solution {
     public String triangleType(int[] nums) {
-        if (!isTriangle(nums)) return "none";
-        if (isEquilateral(nums)) return "equilateral";
-        if (isIsosceles(nums)) return "isosceles";
+        int a = nums[0], b = nums[1], c = nums[2];
+        if (a + b <= c || a + c <= b || b + c <= a) return "none";
+        if (a == b && b == c) return "equilateral";
+        if (a == b || b == c || a == c) return "isosceles";
         return "scalene";
-    }
-
-    private boolean isTriangle(int[] nums) {
-        return nums[0] + nums[1] > nums[2] &&
-               nums[0] + nums[2] > nums[1] &&
-               nums[1] + nums[2] > nums[0];
-    }
-
-    private boolean isEquilateral(int[] nums) {
-        return nums[0] == nums[1] && nums[1] == nums[2];
-    }
-
-    private boolean isIsosceles(int[] nums) {
-        return nums[0] == nums[1] || nums[1] == nums[2] || nums[0] == nums[2];
     }
 }
