@@ -11,18 +11,33 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-         HashSet <ListNode> nodes=new HashSet<>();
-        while(headA!=null){
-            nodes.add(headA);
-            headA=headA.next;
-        }
-        while(headB!=null){
-            if(nodes.contains(headB)){
-                return headB;
+          ListNode temp1=headA;
+        ListNode temp2=headB;
+        int n1=0,n2=0;
 
-            }
-            headB=headB.next;
+        while(temp1!=null){
+            n1++;
+            temp1=temp1.next;
         }
-        return null;
+        while(temp2!=null){
+            n2++;
+            temp2=temp2.next;
+        }
+        if(n1<n2) return collisionPoint(headA,headB,n2-n1);
+
+        return collisionPoint(headB,headA,n1-n2);
+
+    }
+    public ListNode collisionPoint(ListNode smallHead,ListNode largerhead,int len){
+        ListNode temp1=smallHead;
+        ListNode temp2=largerhead;
+        for(int i=0;i<len;i++) temp2=temp2.next;
+
+        while(temp1!=temp2){
+            temp1=temp1.next;
+            temp2=temp2.next;
+        }
+        return temp1;
+
     }
 }
