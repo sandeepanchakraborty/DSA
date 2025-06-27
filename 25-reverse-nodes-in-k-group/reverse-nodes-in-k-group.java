@@ -9,32 +9,52 @@
  * }
  */
 class Solution {
-
     public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode t = head;
-        ListNode curr = head;
-        ListNode prev = null;
-        int cnt = 0;
+        ListNode temp=head;
+        ListNode prevLast=null;
+        while(temp!=null){
+            ListNode kThNode=getKthNode(temp,k);
 
-        while(t != null && cnt < k) 
-        {
-            t = t.next;
-            cnt++;
+            if(kThNode==null){
+                if(prevLast!=null){
+                    prevLast.next=temp;
+                    
+                }
+                break;
+            }
+            ListNode nextNode=kThNode.next;
+            kThNode.next=null;
+            reverseLinkedList(temp);
+
+            if(temp==head){
+                head=kThNode;
+
+            }else{
+                prevLast.next=kThNode;
+            }
+            prevLast=temp;
+            temp=nextNode;
         }
-        if(cnt < k) 
-        {
+        return head;
+    }
+
+    public ListNode reverseLinkedList(ListNode head){
+        if(head==null || head.next==null){
             return head;
         }
-        for(int i=k; i>0; i--)
-        {
-            t = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = t;
-            
-        }
-        head.next = reverseKGroup(curr,k);
-        
-        return prev;
+        ListNode newhead=reverseLinkedList(head.next);
+        ListNode front=head.next;
+        front.next=head;
+        head.next=null;
+        return newhead;
     }
+    public ListNode getKthNode(ListNode temp,int k){
+        k-=1;
+        while(temp!=null && k>0){
+            k--;
+            temp=temp.next;
+        }
+        return temp;
+    }
+
 }
