@@ -2,7 +2,7 @@ class Solution {
 
     public int maximumGain(String s, int x, int y) {
         int totalScore = 0;
-        String highPriorityPair = x > y ? "ab" : "ba";
+        String highPriorityPair = x >= y ? "ab" : "ba";
         String lowPriorityPair = highPriorityPair.equals("ab") ? "ba" : "ab";
 
         // First pass: remove high priority pair
