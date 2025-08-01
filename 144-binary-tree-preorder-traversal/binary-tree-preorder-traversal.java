@@ -15,18 +15,24 @@
  */
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> arr=new ArrayList<>();
-        func(root,arr);
-        return arr;
-    }
-    public void func(TreeNode root,List<Integer>arr){
-        if(root==null){
-            return; 
-        }
-        arr.add(root.val);
-        func(root.left,arr);
-        func(root.right,arr);
+         List<Integer> ans=new ArrayList<>();
+         if(root==null){
+            return ans;
+         }
+         Stack<TreeNode> st=new Stack<>();
+         st.push(root);
+         while(!st.empty()){
+            root=st.pop();
+            ans.add(root.val);
+            if(root.right!=null){
+                st.push(root.right);
+            }
+            if(root.left!=null){
+                st.push(root.left);
+            }
 
+         }
+         return ans;
 
     }
 }
